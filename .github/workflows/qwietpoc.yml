@@ -28,8 +28,8 @@ jobs:
     - name: preZero Static Analysis
       run: |
         ${GITHUB_WORKSPACE}/sl --version
-        ${GITHUB_WORKSPACE}/sl analyze --strict --wait \
-          --app Qwiet-js-GH \
+        QWIET_EXTERNAL_SECRETS=true ${GITHUB_WORKSPACE}/sl analyze --strict --wait \
+          --app Qwiet-js-NewSecrets \
           --tag branch=${{ github.head_ref }} \
           --container 18fgsa/s3-resource .
       env:
@@ -49,7 +49,7 @@ jobs:
         curl https://cdn.shiftleft.io/download/sl > ${GITHUB_WORKSPACE}/sl && chmod a+rx ${GITHUB_WORKSPACE}/sl
     - name: Validate Build Rules
       run: |
-        ${GITHUB_WORKSPACE}/sl check-analysis --app Qwiet-js-GH \
+        ${GITHUB_WORKSPACE}/sl check-analysis --app Qwiet-js-NewSecrets \
             --github-pr-number=${{github.event.number}} \
             --github-pr-user=${{ github.repository_owner }} \
             --github-pr-repo=${{ github.event.repository.name }} \
