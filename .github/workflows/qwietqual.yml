@@ -30,7 +30,7 @@ jobs:
         ${GITHUB_WORKSPACE}/sl --version
         ${GITHUB_WORKSPACE}/sl analyze --strict --wait \
           --app Qwiet-js-GH \
-          --tag branch=${{ github.head_ref }} \
+          --tag branch=${{ github.head_ref }} --additional-findings=js.nodejs.rules,secrets,insights \
           --js --container 18fgsa/s3-resource .
       env:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
